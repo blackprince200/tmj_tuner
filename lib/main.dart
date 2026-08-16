@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'presentation/bloc/tuner_cubit.dart';
 import 'presentation/screens/tuner_screen.dart';
+import 'presentation/theme/app_colors.dart';
 import 'services/audio_capture_service.dart';
 
 void main() {
@@ -46,14 +47,14 @@ class GuitarTunerApp extends StatelessWidget {
     return ThemeData(
       useMaterial3: true,
       brightness: brightness,
-      scaffoldBackgroundColor: const Color(0xFF0E0E1A),
+      scaffoldBackgroundColor: AppColors.baseBackground,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: const Color(0xFF2BBE8C),
+        seedColor: AppColors.primaryAccent,
         brightness: brightness,
       ),
       sliderTheme: const SliderThemeData(
-        activeTrackColor: Color(0xFF2BBE8C),
-        thumbColor: Color(0xFF2BBE8C),
+        activeTrackColor: AppColors.primaryAccent,
+        thumbColor: AppColors.primaryAccent,
       ),
     );
   }

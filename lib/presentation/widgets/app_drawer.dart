@@ -4,6 +4,7 @@ import '../screens/chord_matrix_screen.dart';
 import '../screens/pitch_spectrogram_screen.dart';
 import '../screens/strobe_tuner_screen.dart';
 import '../screens/tuner_screen.dart';
+import '../theme/app_colors.dart';
 
 /// Side drawer (hamburger menu) listing every screen in the app.
 /// Inserted as the `Scaffold.drawer` on each screen so the same menu
@@ -18,7 +19,7 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: const Color(0xFF0D0D1A),
+      backgroundColor: AppColors.baseBackground,
       child: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,11 +92,11 @@ class _Header extends StatelessWidget {
             width: 44,
             height: 44,
             decoration: BoxDecoration(
-              color: const Color(0xFF00E676).withOpacity(0.15),
+              color: AppColors.primaryAccent.withOpacity(0.15),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: const Color(0xFF00E676).withOpacity(0.4)),
+              border: Border.all(color: AppColors.primaryAccent.withOpacity(0.4)),
             ),
-            child: const Icon(Icons.music_note_rounded, color: Color(0xFF00E676), size: 24),
+            child: const Icon(Icons.music_note_rounded, color: AppColors.primaryAccent, size: 24),
           ),
           const SizedBox(width: 12),
           const Column(
@@ -107,7 +108,7 @@ class _Header extends StatelessWidget {
               ),
               Text(
                 'Pro tuning suite',
-                style: TextStyle(color: Color(0xFF6B6B9A), fontSize: 12),
+                style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
               ),
             ],
           ),
@@ -158,17 +159,17 @@ class _DrawerItem extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           decoration: BoxDecoration(
-            color: isActive ? const Color(0xFF00E676).withOpacity(0.12) : null,
+            color: isActive ? AppColors.primaryAccent.withOpacity(0.12) : null,
             borderRadius: BorderRadius.circular(12),
             border: isActive
-                ? Border.all(color: const Color(0xFF00E676).withOpacity(0.35))
+                ? Border.all(color: AppColors.primaryAccent.withOpacity(0.35))
                 : null,
           ),
           child: Row(
             children: [
               Icon(
                 icon,
-                color: isActive ? const Color(0xFF00E676) : Colors.white60,
+                color: isActive ? AppColors.primaryAccent : Colors.white60,
                 size: 22,
               ),
               const SizedBox(width: 14),
@@ -179,20 +180,20 @@ class _DrawerItem extends StatelessWidget {
                     Text(
                       label,
                       style: TextStyle(
-                        color: isActive ? const Color(0xFF00E676) : Colors.white,
+                        color: isActive ? AppColors.primaryAccent : Colors.white,
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(
                       subtitle,
-                      style: const TextStyle(color: Color(0xFF6B6B9A), fontSize: 11),
+                      style: const TextStyle(color: AppColors.textSecondary, fontSize: 11),
                     ),
                   ],
                 ),
               ),
               if (isActive)
-                const Icon(Icons.check_circle_rounded, color: Color(0xFF00E676), size: 18),
+                const Icon(Icons.check_circle_rounded, color: AppColors.primaryAccent, size: 18),
             ],
           ),
         ),

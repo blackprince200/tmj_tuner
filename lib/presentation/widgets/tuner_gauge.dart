@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
 
 /// Professional arc-based tuner gauge inspired by FastTune's UI design.
 /// 
@@ -121,7 +122,7 @@ class _ArcGaugePainter extends CustomPainter {
     final radius = math.min(cx * 0.88, cy * 0.92);
 
     // ── Background ──────────────────────────────────────────────────
-    final bg = Paint()..color = const Color(0xFF0D0D1A);
+    final bg = Paint()..color = AppColors.baseBackground;
     canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), bg);
 
     // ── Sweet-spot arc (green zone) ──────────────────────────────────
@@ -130,7 +131,7 @@ class _ArcGaugePainter extends CustomPainter {
     final centerAngleRad = (_startAngleDeg + _sweepDeg / 2) * math.pi / 180;
 
     final sweetPaint = Paint()
-      ..color = const Color(0xFF00E676).withOpacity(0.18)
+      ..color = AppColors.tuningGreen.withOpacity(0.18)
       ..style = PaintingStyle.stroke
       ..strokeWidth = radius * 0.13
       ..strokeCap = StrokeCap.butt;
@@ -144,7 +145,7 @@ class _ArcGaugePainter extends CustomPainter {
 
     // ── Main arc track ───────────────────────────────────────────────
     final trackPaint = Paint()
-      ..color = const Color(0xFF1E1E35)
+      ..color = AppColors.surfaceCard
       ..style = PaintingStyle.stroke
       ..strokeWidth = radius * 0.045
       ..strokeCap = StrokeCap.round;
@@ -177,7 +178,7 @@ class _ArcGaugePainter extends CustomPainter {
 
       Color tickColor;
       if (isCenter) {
-        tickColor = const Color(0xFF00E676).withOpacity(0.9);
+        tickColor = AppColors.tuningGreen.withOpacity(0.9);
       } else if (isMajor) {
         tickColor = Colors.white.withOpacity(0.55);
       } else {
@@ -208,7 +209,7 @@ class _ArcGaugePainter extends CustomPainter {
         Offset(lx, ly),
         TextStyle(
           color: labelCents[i] == 0
-              ? const Color(0xFF00E676).withOpacity(0.8)
+              ? AppColors.tuningGreen.withOpacity(0.8)
               : Colors.white.withOpacity(0.38),
           fontSize: radius * 0.095,
           fontWeight: FontWeight.w700,
@@ -219,7 +220,7 @@ class _ArcGaugePainter extends CustomPainter {
 
     // ── 'b' and '#' end labels ───────────────────────────────────────
     const labelStyle = TextStyle(
-      color: Color(0xFF6B6B9A),
+      color: AppColors.textSecondary,
       fontSize: 13,
       fontWeight: FontWeight.w800,
       fontStyle: FontStyle.italic,
@@ -289,7 +290,7 @@ class _ArcGaugePainter extends CustomPainter {
     canvas.drawCircle(
       Offset(cx, cy),
       radius * 0.045,
-      Paint()..color = cents == null ? const Color(0xFF2A2A40) : needleColor,
+      Paint()..color = cents == null ? AppColors.dividersBorders : needleColor,
     );
     canvas.drawCircle(
       Offset(cx, cy),

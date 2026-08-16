@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../data/models/tuning.dart';
+import '../theme/app_colors.dart';
 
 /// Guitar headstock-style string selector with frequency labels.
 /// Shows note name + target Hz under each button for clarity.
@@ -122,9 +123,9 @@ class _StringButton extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: isActive
                     ? activeColor.withOpacity(0.2)
-                    : const Color(0xFF1A1A2E),
+                    : AppColors.baseBackground,
                 border: Border.all(
-                  color: isActive ? activeColor : const Color(0xFF2A2A40),
+                  color: isActive ? activeColor : AppColors.dividersBorders,
                   width: isActive ? 2.5 : 1.5,
                 ),
                 boxShadow: isActive
@@ -155,7 +156,7 @@ class _StringButton extends StatelessWidget {
               style: TextStyle(
                 color: isActive
                     ? activeColor.withOpacity(0.8)
-                    : const Color(0xFF4A4A6A),
+                    : AppColors.textSecondary,
                 fontSize: (diameter * 0.18).clamp(8.0, 11.0),
                 fontWeight: FontWeight.w500,
               ),

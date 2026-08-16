@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/models/tuning.dart';
 import '../bloc/tuner_cubit.dart';
 import '../bloc/tuner_state.dart';
+import '../theme/app_colors.dart';
 
 class InstrumentSettingsSheet extends StatelessWidget {
   const InstrumentSettingsSheet({super.key});
@@ -13,7 +14,7 @@ class InstrumentSettingsSheet extends StatelessWidget {
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: const Color(0xFF16162A),
+      backgroundColor: AppColors.surfaceCard,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -94,7 +95,7 @@ class InstrumentSettingsSheet extends StatelessWidget {
                   max: 450,
                   divisions: 20,
                   value: state.a4Reference,
-                  activeColor: const Color(0xFF2BBE8C),
+                  activeColor: AppColors.primaryAccent,
                   label: state.a4Reference.toStringAsFixed(0),
                   onChanged: cubit.setA4Reference,
                 ),
@@ -104,7 +105,7 @@ class InstrumentSettingsSheet extends StatelessWidget {
                   max: 15,
                   divisions: 13,
                   value: state.toleranceCents,
-                  activeColor: const Color(0xFF2BBE8C),
+                  activeColor: AppColors.primaryAccent,
                   label: state.toleranceCents.toStringAsFixed(0),
                   onChanged: cubit.setToleranceCents,
                 ),
@@ -150,17 +151,17 @@ class _Chip extends StatelessWidget {
         duration: const Duration(milliseconds: 150),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
-          color: selected ? const Color(0xFF2BBE8C).withOpacity(0.2) : const Color(0xFF2A2A3A),
+          color: selected ? AppColors.primaryAccent.withOpacity(0.2) : AppColors.baseBackground,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: selected ? const Color(0xFF2BBE8C) : Colors.transparent,
+            color: selected ? AppColors.primaryAccent : Colors.transparent,
             width: 1.5,
           ),
         ),
         child: Text(
           label,
           style: TextStyle(
-            color: selected ? const Color(0xFF2BBE8C) : Colors.white70,
+            color: selected ? AppColors.primaryAccent : AppColors.textSecondary,
             fontSize: 13,
             fontWeight: FontWeight.w600,
           ),

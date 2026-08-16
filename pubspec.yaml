@@ -35,6 +35,7 @@ flutter:
 
   assets:
     - assets/icon/
+    - assets/ui/
 
 # flutter_launcher_icons config — reads assets/icon/logo.png and
 # generates all required Android/iOS icon sizes.
