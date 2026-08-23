@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:guitar_tuner_app/app/routes/app_router.dart';
 
 import 'presentation/bloc/tuner_cubit.dart';
 import 'presentation/screens/tuner_screen.dart';
@@ -31,13 +32,13 @@ class GuitarTunerApp extends StatelessWidget {
       create: (_) => TunerCubit(
         audioService: RecordAudioCaptureService(),
       ),
-      child: MaterialApp(
+      child: MaterialApp.router(
         title: 'TMJ Guitar Tuner',
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.dark,
         theme: _buildTheme(Brightness.light),
         darkTheme: _buildTheme(Brightness.dark),
-        home: const TunerScreen(),
+        routerConfig: AppRouter.router,
       ),
     );
   }
