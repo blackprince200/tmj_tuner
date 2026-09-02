@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:guitar_tuner_app/app/routes/routes_name.dart';
 
 import 'package:guitar_tuner_app/pages/splash.dart';
+import 'package:guitar_tuner_app/pages/test_record_page.dart';
 
 
 class RoutePages {
@@ -13,6 +14,13 @@ class RoutePages {
       builder: (context, state){
         return const SplashPage();
       },
+    ),
+
+    GoRoute(
+        path: RoutesName.testRecordPage,
+      builder: (context,state){
+          return const TestRecordPage();
+      }
     )
   ];
 }
