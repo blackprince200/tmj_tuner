@@ -9,6 +9,9 @@ class TestRecordPage extends StatefulWidget {
 }
 
 class _TestRecordPageState extends State<TestRecordPage> {
+
+  final RecorderPage recorder = RecorderPage();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +20,7 @@ class _TestRecordPageState extends State<TestRecordPage> {
 
         actions: [
           TextButton(onPressed: (){
-            startTuner();
+            recorder.onToggleButtonPressed();
           }, child:const Text("Start"))
         ],
       ),
