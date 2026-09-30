@@ -1,49 +1,66 @@
+import 'dart:async';
+
+import 'package:guitar_tuner_app/tuner/tuner_engine.dart';
 import 'package:record/record.dart';
 
-final AudioRecorder _recorder = AudioRecorder();
+class RecorderPage {
+  final _recorder = AudioRecorder();
+  Stream<List<int>>? _stream;
+  StreamSubscription<List<int>>? _streamSubscription;
 
-Future<void> startTuner() async {
-  try {
+  final _processor = GuitarPitchStreamProcessor(
+      sampleRate: 44100,
+      windowSize: 4096,
+      hopSize: 1024,
+      threshold: 0.10
+  );
+
+  bool _isListening = false;
+
+  Future <void> _startListening() async {
+
     final hasPermission = await _recorder.hasPermission();
-
-    print('Permission: $hasPermission');
-
     if (!hasPermission) {
       print('Microphone permission denied');
       return;
     }
 
-    print('Starting recorder...');
-
-    final stream = await _recorder.startStream(
+    _stream = await _recorder.startStream(
       const RecordConfig(
         encoder: AudioEncoder.pcm16bits,
         sampleRate: 44100,
         numChannels: 1,
+        streamBufferSize: 1024,
+        autoGain: false,
+        echoCancel: false,
+        noiseSuppress: false,
       ),
     );
 
-    print('Stream started');
+    _streamSubscription = _stream!.listen((data) {
+      final result = _processor.addChunkAndDetect(data);
+      if (result.isPitched) {
+        print("------------------------------------------------");
+        print("Probability :: ${result.probability}");
+        print("FrequencyHz :: ${result.frequencyHz}");
+        print("Pitched :: ${result.isPitched}");
+        print("------------------------------------------------");
+      }
+    });
+    _isListening = true;
+  }
 
-    stream.listen(
-          (audioData) {
-        final nonZero =
-            audioData.where((byte) => byte != 0).length;
+  Future <void> _stopListening() async {
+    if (!_isListening) return;
 
-        print(
-          'Length: ${audioData.length}, '
-              'Non-zero: $nonZero',
-        );
-      },
-      onError: (error) {
-        print('STREAM ERROR: $error');
-      },
-      onDone: () {
-        print('STREAM DONE');
-      },
-    );
-  } catch (e, st) {
-    print('RECORDER ERROR: $e');
-    print(st);
+    await _streamSubscription?.cancel();
+    _streamSubscription = null;
+
+    await _recorder.stop();
+    _isListening = false;
+  }
+
+  void onToggleButtonPressed(){
+    _isListening? _stopListening():_startListening();
   }
 }

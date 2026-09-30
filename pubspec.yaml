@@ -19,6 +19,7 @@ dependencies:
   path_provider: ^2.1.6
   go_router: ^17.5.0
   record: ^7.1.1
+  pitch_detector_dart: ^0.0.7
 
 dev_dependencies:
   flutter_test:
