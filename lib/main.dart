@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:guitar_tuner_app/app/routes/app_router.dart';
 
-import 'presentation/bloc/tuner_cubit.dart';
-import 'presentation/screens/tuner_screen.dart';
-import 'services/audio_capture_service.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,18 +24,13 @@ class GuitarTunerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => TunerCubit(
-        audioService: RecordAudioCaptureService(),
-      ),
-      child: MaterialApp.router(
+    return MaterialApp.router(
         title: 'TMJ Guitar Tuner',
         debugShowCheckedModeBanner: false,
         themeMode: ThemeMode.dark,
         theme: _buildTheme(Brightness.light),
         darkTheme: _buildTheme(Brightness.dark),
         routerConfig: AppRouter.router,
-      ),
     );
   }
 
